@@ -1,0 +1,39 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#1a1a2e"/>
+  <!-- Glow effect -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Head -->
+  <circle cx="100" cy="70" r="35" fill="#d4a574"/>
+  
+  <!-- Hair -->
+  <path d="M 70 50 Q 70 35 100 35 Q 130 35 130 50" fill="#2d1810" stroke="#1a0f00" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <circle cx="90" cy="65" r="5" fill="#00ff88" opacity="0.8"/>
+  <circle cx="110" cy="65" r="5" fill="#00ff88" opacity="0.8"/>
+  <circle cx="92" cy="63" r="2" fill="#000"/>
+  <circle cx="112" cy="63" r="2" fill="#000"/>
+  
+  <!-- Nose -->
+  <line x1="100" y1="70" x2="100" y2="80" stroke="#8b6f47" stroke-width="2"/>
+  
+  <!-- Mouth -->
+  <path d="M 95 85 Q 100 90 105 85" stroke="#a0522d" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Body -->
+  <rect x="75" y="105" width="50" height="60" rx="8" fill="#1f1f3d"/>
+  <rect x="75" y="105" width="50" height="60" rx="8" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Shoulders/Armor -->
+  <ellipse cx="65" cy="115" rx="15" ry="20" fill="#2d2d4a"/>
+  <ellipse cx="135" cy="115" rx="15" ry="20" fill="#2d2d4a"/>
+  
+  <!-- Arms -->
+  <rect x="50" y="115" width="15" height="45" rx="7" fill="#d4a574"/>
+  <rect x="135" y="115" width="15" height="45" rx="7" fill="#d4a574"/>
+  
+  <!-- Weapon -->
+  <line x1="55" y1="160" x2="45" y2="175" stroke="#ffaa00" stroke-width="3" stroke-linecap="round"/>
+</svg>

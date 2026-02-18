@@ -1,0 +1,36 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#1a1a2e"/>
+  <!-- Glow effect -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#ff00ff" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Head -->
+  <circle cx="100" cy="70" r="35" fill="#e8d5c4"/>
+  
+  <!-- Hair (longer, female style) -->
+  <path d="M 65 50 Q 65 30 100 25 Q 135 30 135 50 L 135 75 Q 100 85 65 75 Z" fill="#c41e3a"/>
+  
+  <!-- Eyes -->
+  <circle cx="88" cy="65" r="5" fill="#ff00ff" opacity="0.8"/>
+  <circle cx="112" cy="65" r="5" fill="#ff00ff" opacity="0.8"/>
+  <circle cx="90" cy="63" r="2" fill="#000"/>
+  <circle cx="114" cy="63" r="2" fill="#000"/>
+  
+  <!-- Nose -->
+  <line x1="100" y1="70" x2="100" y2="80" stroke="#b5a89f" stroke-width="2"/>
+  
+  <!-- Mouth -->
+  <path d="M 93 87 Q 100 92 107 87" stroke="#c41e3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Body -->
+  <path d="M 80 105 L 75 170 L 125 170 L 120 105 Z" fill="#4a0e4e"/>
+  <path d="M 80 105 L 75 170 L 125 170 L 120 105 Z" fill="none" stroke="#ff00ff" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Arms -->
+  <rect x="45" y="115" width="15" height="50" rx="7" fill="#e8d5c4"/>
+  <rect x="140" y="115" width="15" height="50" rx="7" fill="#e8d5c4"/>
+  
+  <!-- Magic circles on arms -->
+  <circle cx="52" cy="140" r="4" fill="#ff00ff" opacity="0.6"/>
+  <circle cx="147" cy="140" r="4" fill="#ff00ff" opacity="0.6"/>
+</svg>

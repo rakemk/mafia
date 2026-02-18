@@ -1,7 +1,7 @@
 {
   "name": "neon-mafia-nights",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,13 +9,22 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
     "expo": "~54.0.30",
+    "expo-router": "~6.0.21",
+    "expo-splash-screen": "~31.0.13",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
-    "react-native": "0.81.5"
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0",
+    "zustand": "^4.4.2"
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "babel-preset-expo": "~54.0.9",
     "typescript": "~5.9.2"
   },
   "private": true
