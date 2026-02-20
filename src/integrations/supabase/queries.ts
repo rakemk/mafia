@@ -68,7 +68,7 @@ export const auth = {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: 'neon-mafia-nights://auth/callback', // Deep link schema
+        redirectTo: 'mafianight://auth/callback', // Deep link schema
       },
     });
     return { data, error };
@@ -116,7 +116,7 @@ export const profiles = {
       .from('profiles')
       .select('*')
       .eq('id', userId)
-      .single();
+      .maybeSingle(); // Use maybeSingle() instead of single() to handle missing profile
     return { data, error };
   },
 
@@ -127,10 +127,14 @@ export const profiles = {
     gender?: string;
     avatar_character?: string;
   }) => {
+    // Use upsert to handle both insert and update cases
     const { data, error } = await supabase
       .from('profiles')
-      .update(updates)
-      .eq('id', userId)
+      .upsert({
+        id: userId,
+        ...updates,
+        updated_at: new Date().toISOString(),
+      })
       .select()
       .single();
     return { data, error };
@@ -153,7 +157,7 @@ export const rooms = {
       .from('game_rooms')
       .select('*')
       .eq('id', roomId)
-      .single();
+      .maybeSingle(); // Use maybeSingle() to handle room not found
     return { data, error };
   },
 
@@ -163,7 +167,7 @@ export const rooms = {
       .select('*')
       .eq('code', code.toUpperCase())
       .eq('status', 'waiting')
-      .single();
+      .maybeSingle(); // Use maybeSingle() to handle room not found
     return { data, error };
   },
 

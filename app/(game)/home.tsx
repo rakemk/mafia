@@ -164,14 +164,14 @@ export default function HomeScreen() {
     ]);
   };
 
-  const getAvatarSource = (avatarId: string | undefined) => {
-    const avatarMap: { [key: string]: any } = {
-      char1: require('@/assets/images/char1.svg'),
-      char2: require('@/assets/images/char2.svg'),
-      char3: require('@/assets/images/char3.svg'),
-      char4: require('@/assets/images/char4.svg'),
+  const getAvatarEmoji = (avatarId: string | undefined) => {
+    const avatarMap: { [key: string]: string } = {
+      char1: '🤠',
+      char2: '🧙',
+      char3: '🥷',
+      char4: '🤴',
     };
-    return avatarMap[avatarId || 'char1'] || avatarMap.char1;
+    return avatarMap[avatarId || 'char1'] || '🤠';
   };
 
   if (loading) {
@@ -192,12 +192,11 @@ export default function HomeScreen() {
           style={styles.profileSection}
           onPress={() => setShowProfileModal(true)}
         >
-          {userProfile?.avatar_character && (
-            <Image 
-              source={getAvatarSource(userProfile.avatar_character)}
-              style={styles.profileAvatarSmall}
-            />
-          )}
+          <View style={styles.profileAvatarSmall}>
+            <Text style={styles.avatarEmoji}>
+              {getAvatarEmoji(userProfile?.avatar_character)}
+            </Text>
+          </View>
           <View style={styles.profileInfoSmall}>
             <Text style={styles.profileNameSmall} numberOfLines={1}>
               {userProfile?.name || 'Player'}
@@ -346,12 +345,11 @@ export default function HomeScreen() {
               <Text style={styles.profileCloseText}>✕</Text>
             </TouchableOpacity>
 
-            {userProfile?.avatar_character && (
-              <Image 
-                source={getAvatarSource(userProfile.avatar_character)}
-                style={styles.profileLargeAvatar}
-              />
-            )}
+            <View style={styles.profileLargeAvatar}>
+              <Text style={styles.profileLargeAvatarEmoji}>
+                {getAvatarEmoji(userProfile?.avatar_character)}
+              </Text>
+            </View>
 
             <Text style={styles.profileModalName}>{userProfile?.name}</Text>
             <Text style={styles.profileModalUsername}>@{userProfile?.username}</Text>
@@ -417,11 +415,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 8,
     paddingBottom: 12,
     borderBottomWidth: 2,
     borderBottomColor: '#00ff00',
     backgroundColor: '#0f0f1e', // Added background for better contrast
+    marginTop: 0, // Removed extra margin
   },
   /* Profile Section (Left Side) */
   profileSection: {
@@ -440,6 +439,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#00ff00',
+    backgroundColor: '#1a2a1e',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarEmoji: {
+    fontSize: 24,
   },
   profileInfoSmall: {
     marginLeft: 8,
@@ -680,6 +685,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 3,
     borderColor: '#00ff00',
+    backgroundColor: '#1a2a1e',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileLargeAvatarEmoji: {
+    fontSize: 64,
   },
   profileModalName: {
     fontSize: 24,

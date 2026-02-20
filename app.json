@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "neon-mafia-nights",
-    "slug": "neon-mafia-nights",
+    "name": "mafia-night",
+    "slug": "mafia-night",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
-    "scheme": "neonmafia",
+    "scheme": "mafianight",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.neonmafiagame.app"
+      "bundleIdentifier": "com.mafianight.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +27,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.neonmafiagame.app"
+      "package": "com.mafianight.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

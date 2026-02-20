@@ -168,6 +168,16 @@ export default function GameRoomScreen() {
 
   const getInitials = (name: string) => name.substring(0, 2).toUpperCase();
 
+  const getAvatarEmoji = (avatarId: string | undefined) => {
+    const avatarMap: { [key: string]: string } = {
+      char1: '🤠',
+      char2: '🧙',
+      char3: '🥷',
+      char4: '🤴',
+    };
+    return avatarMap[avatarId || 'char1'] || '🤠';
+  };
+
   if (loading) {
     return (
       <View style={styles.centerLoading}>
@@ -227,9 +237,13 @@ export default function GameRoomScreen() {
                   }
                 ]}
               >
-                {/* Avatar Circle with Initials */}
+                {/* Avatar Circle with Emoji or Initials */}
                 <View style={[styles.avatarCircle, { borderColor: roleColor }]}>
-                  <Text style={styles.avatarText}>{getInitials(player.username)}</Text>
+                  {player.avatar_character ? (
+                    <Text style={styles.avatarEmoji}>{getAvatarEmoji(player.avatar_character)}</Text>
+                  ) : (
+                    <Text style={styles.avatarText}>{getInitials(player.username)}</Text>
+                  )}
                 </View>
 
                 {/* Name and Role */}
@@ -419,6 +433,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: isTablet ? 14 : 12,
+  },
+  avatarEmoji: {
+    fontSize: isTablet ? 28 : 24,
   },
   playerName: {
     color: '#fff',

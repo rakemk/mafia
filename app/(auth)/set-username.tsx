@@ -8,18 +8,16 @@ import {
   ActivityIndicator,
   Alert,
   ScrollView,
-  Image,
-  Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/src/integrations/supabase/client';
 import { profiles } from '@/src/integrations/supabase/queries';
 
 const AVATARS = [
-  { id: 'char1', label: 'Warrior', image: require('@/assets/images/char1.svg') },
-  { id: 'char2', label: 'Mage', image: require('@/assets/images/char2.svg') },
-  { id: 'char3', label: 'Rogue', image: require('@/assets/images/char3.svg') },
-  { id: 'char4', label: 'Knight', image: require('@/assets/images/char4.svg') },
+  { id: 'char1', label: 'Cowboy', emoji: '🤠' },
+  { id: 'char2', label: 'Wizard', emoji: '🧙' },
+  { id: 'char3', label: 'Ninja', emoji: '🥷' },
+  { id: 'char4', label: 'Prince', emoji: '🤴' },
 ];
 
 export default function SetUsernameScreen() {
@@ -79,11 +77,20 @@ export default function SetUsernameScreen() {
         avatar_character: selectedAvatar,
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Profile update error:', error);
+        throw error;
+      }
 
+      // Profile created successfully
       router.replace('/(game)/home');
     } catch (error: any) {
-      Alert.alert('Error', error.message);
+      console.error('Profile creation failed:', error);
+      Alert.alert(
+        'Profile Creation Failed', 
+        error.message || 'Unable to create profile. Please try again.',
+        [{ text: 'OK' }]
+      );
     } finally {
       setLoading(false);
     }
@@ -224,10 +231,7 @@ export default function SetUsernameScreen() {
                 disabled={loading}
                 activeOpacity={0.7}
               >
-                <Image
-                  source={avatar.image}
-                  style={styles.avatarImage}
-                />
+                <Text style={styles.avatarEmoji}>{avatar.emoji}</Text>
                 <Text style={styles.avatarLabel}>{avatar.label}</Text>
               </TouchableOpacity>
             ))}
@@ -362,11 +366,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
   },
-  avatarImage: {
-    width: 80,
-    height: 80,
+  avatarEmoji: {
+    fontSize: 64,
     marginBottom: 8,
-    borderRadius: 8,
   },
   avatarLabel: {
     color: '#00ff00',

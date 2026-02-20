@@ -1,4 +1,4 @@
-# Neon Mafia Nights - React Native Mobile App
+# Mafia Night - React Native Mobile App
 
 A modern mobile game application built with React Native, Expo, and Supabase featuring real-time multiplayer Mafia gameplay.
 
@@ -406,7 +406,7 @@ chat.sendMessage(roomId, userId, username, message)
 
 ## 📄 License
 
-This project is part of the Neon Mafia Nights game series. See LICENSE file for details.
+This project is part of the Mafia Night game series. See LICENSE file for details.
 
 ## 🤝 Contributing
 

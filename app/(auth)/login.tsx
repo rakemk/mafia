@@ -61,7 +61,7 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     try {
       // Note: This requires proper deep link setup in Supabase dashboard
-      // URL: neon-mafia-nights://auth/callback
+      // URL: mafianight://auth/callback
       const { data, error } = await auth.signInWithOAuth('google');
       if (error) throw error;
 
@@ -78,7 +78,7 @@ export default function LoginScreen() {
       contentContainerStyle={styles.contentContainer}
     >
       <View style={styles.header}>
-        <Text style={styles.title}>Neon Mafia Nights</Text>
+        <Text style={styles.title}>Mafia Night</Text>
         <Text style={styles.subtitle}>Sign In</Text>
       </View>
 
