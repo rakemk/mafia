@@ -58,10 +58,20 @@ export default function CreateRoomScreen() {
       }
     } catch (error: any) {
       console.error('Create Room Error:', error);
-      let message = error.message;
-      if (message && (message.includes('game_rooms') || message.includes('does not exist'))) {
-        message = 'System Error: The game database table is missing. Please contact support.';
+      let message = error.message || 'Failed to create room';
+      
+      // Better error message for missing database tables
+      if (message.includes('game_rooms') || message.includes('schema cache') || message.includes('PGRST205')) {
+        Alert.alert(
+          'Database Setup Required',
+          'The game database is not set up yet.\n\n' +
+          '✅ Fix: Run the FULL_SETUP.sql file in your Supabase SQL Editor.\n\n' +
+          'See DATABASE_FIX_NOW.md for step-by-step instructions.',
+          [{ text: 'OK' }]
+        );
+        return;
       }
+      
       Alert.alert('Error', message);
     } finally {
       setLoading(false);
@@ -103,27 +113,45 @@ export default function CreateRoomScreen() {
 
           <View style={styles.section}>
             <Text style={styles.label}>Max Players</Text>
-            <View style={styles.playerOptions}>
-              {['6', '8', '10', '12', '15', '20'].map((num) => (
-                <TouchableOpacity
-                  key={num}
-                  style={[
-                    styles.playerButton,
-                    maxPlayers === num && styles.playerButtonActive,
-                  ]}
-                  onPress={() => setMaxPlayers(num)}
-                >
-                  <Text
+            <View style={styles.playerOptionsContainer}>
+              <View style={styles.playerOptionsRow}>
+                {['6', '8', '10', '12', '15'].map((num) => (
+                  <TouchableOpacity
+                    key={num}
                     style={[
-                      styles.playerButtonText,
-                      maxPlayers === num &&
-                      styles.playerButtonTextActive,
+                      styles.playerButton,
+                      maxPlayers === num && styles.playerButtonActive,
                     ]}
+                    onPress={() => setMaxPlayers(num)}
                   >
-                    {num}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      style={[
+                        styles.playerButtonText,
+                        maxPlayers === num &&
+                        styles.playerButtonTextActive,
+                      ]}
+                    >
+                      {num}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <TouchableOpacity
+                style={[
+                  styles.playerButtonLarge,
+                  maxPlayers === '20' && styles.playerButtonActive,
+                ]}
+                onPress={() => setMaxPlayers('20')}
+              >
+                <Text
+                  style={[
+                    styles.playerButtonTextLarge,
+                    maxPlayers === '20' && styles.playerButtonTextActive,
+                  ]}
+                >
+                  20
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -220,22 +248,33 @@ const styles = StyleSheet.create({
     marginTop: 6,
     textAlign: 'right',
   },
-  playerOptions: {
+  playerOptionsContainer: {
+    gap: 12,
+  },
+  playerOptionsRow: {
     flexDirection: 'row',
     gap: 8,
-    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   playerButton: {
     flex: 1,
-    minWidth: 50,
-    aspectRatio: 1,
+    paddingVertical: 16,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0f0f1e',
     borderWidth: 2,
     borderColor: '#333',
     borderRadius: 8,
-    margin: 4,
+  },
+  playerButtonLarge: {
+    paddingVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0f0f1e',
+    borderWidth: 2,
+    borderColor: '#333',
+    borderRadius: 12,
+    marginTop: 4,
   },
   playerButtonActive: {
     backgroundColor: '#1a2a1e',
@@ -248,12 +287,17 @@ const styles = StyleSheet.create({
   },
   playerButtonText: {
     color: '#888',
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  playerButtonTextLarge: {
+    color: '#888',
+    fontSize: 32,
     fontWeight: 'bold',
   },
   playerButtonTextActive: {
     color: '#00ff00',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   infoBox: {

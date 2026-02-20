@@ -1,0 +1,21 @@
+-- ============================================
+-- DISABLE EMAIL CONFIRMATION REQUIREMENT
+-- This allows users to login immediately without email verification
+-- Run this in Supabase SQL Editor
+-- ============================================
+
+-- This is a Supabase auth configuration change
+-- You need to do this in the Dashboard instead:
+--
+-- 1. Go to: https://supabase.com/dashboard/project/ohjweanlhqjdtfxgehrs
+-- 2. Click "Authentication" → "Settings"
+-- 3. Scroll to "Email Auth" section
+-- 4. Find "Confirm email" toggle
+-- 5. Turn it OFF (disable it)
+-- 6. Click "Save"
+--
+-- This will allow users to login immediately after signup
+-- without needing to verify their email.
+
+-- After disabling, users who already signed up can now login!
+-- No more "email not confirmed" errors.

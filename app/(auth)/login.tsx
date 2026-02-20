@@ -28,7 +28,25 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const { data, error } = await auth.signIn(email, password);
-      if (error) throw error;
+      if (error) {
+        // Check for email not confirmed error
+        if (error.message?.includes('Email not confirmed') || error.message?.includes('email_not_confirmed')) {
+          Alert.alert(
+            'Email Not Verified',
+            'Your email needs to be verified.\n\n' +
+            'Quick Fix:\n' +
+            '1. Check your email for verification link\n' +
+            '2. OR disable email verification in Supabase:\n' +
+            '   • Dashboard → Authentication → Settings\n' +
+            '   • Turn OFF "Confirm email"\n' +
+            '   • Save and try again\n\n' +
+            'Then you can login immediately!',
+            [{ text: 'OK' }]
+          );
+          return;
+        }
+        throw error;
+      }
 
       if (data.session) {
         router.replace('/(game)/home');
@@ -72,6 +90,16 @@ export default function LoginScreen() {
         >
           <Text style={styles.googleButtonText}>🔵 Continue with Google</Text>
         </TouchableOpacity>
+
+        {/* Commented out until phone auth is configured in Supabase
+        <TouchableOpacity
+          style={[styles.phoneButton, loading && styles.buttonDisabled]}
+          onPress={() => router.push('/(auth)/phone-login')}
+          disabled={loading}
+        >
+          <Text style={styles.phoneButtonText}>📱 Login with Phone (OTP)</Text>
+        </TouchableOpacity>
+        */}
 
         <View style={styles.divider}>
           <View style={styles.dividerLine} />
@@ -215,9 +243,23 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 12,
   },
   googleButtonText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  phoneButton: {
+    backgroundColor: '#00ffff',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#00cccc',
+  },
+  phoneButtonText: {
     color: '#000',
     fontSize: 16,
     fontWeight: 'bold',

@@ -83,6 +83,30 @@ export const auth = {
     const { data, error } = await supabase.auth.getSession();
     return { session: data?.session, error };
   },
+
+  // Phone authentication with OTP
+  signInWithPhone: async (phone: string) => {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      phone,
+    });
+    return { data, error };
+  },
+
+  verifyOtp: async (phone: string, token: string) => {
+    const { data, error } = await supabase.auth.verifyOtp({
+      phone,
+      token,
+      type: 'sms',
+    });
+    return { data, error };
+  },
+
+  signUpWithPhone: async (phone: string) => {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      phone,
+    });
+    return { data, error };
+  },
 };
 
 // User profile functions

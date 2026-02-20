@@ -83,8 +83,16 @@ export default function HomeScreen() {
       setGameRooms(roomsWithCounts || []);
     } catch (error: any) {
       console.error('Failed to load rooms:', error);
-      if (error.message && error.message.includes('game_rooms')) {
-        Alert.alert('System Error', 'Game tables are missing. Please run database setup.');
+      const message = error?.message || '';
+      
+      if (message.includes('game_rooms') || message.includes('schema cache') || message.includes('PGRST205')) {
+        Alert.alert(
+          'Database Setup Required',
+          'The game database is not set up yet.\n\n' +
+          '✅ Fix: Run the FULL_SETUP.sql file in your Supabase SQL Editor.\n\n' +
+          'See DATABASE_FIX_NOW.md for detailed instructions.',
+          [{ text: 'OK' }]
+        );
       }
     }
   };
